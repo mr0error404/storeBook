@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="boo">
+        <item>Blink: The Power of Thinking Without Thin...</item>
+        <item>Reed:  Without Thin The Power </item>
+        <item>Green:Thinking Without Thin...</item>
+        <item>Black: The Power of Thinking Without Thin...</item>
+    </string-array>
+</resources>
