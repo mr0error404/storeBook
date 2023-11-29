@@ -2,6 +2,7 @@ package com.example.newassahgm;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     Button plus ,nig,addToCart;
     TextView txtPrice,txtQuantity;
     ImageView imageView;
+    String adapterView1;
 
     int counter =1,price=0,idSpinner=0;
 
@@ -38,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.book2,
             R.drawable.book3,
             R.drawable.book4,
+    };
+
+    String [] imagesString = {
+            String.valueOf(R.drawable.book1),
+            String.valueOf(R.drawable.book2),
+            String.valueOf(R.drawable.book3),
+            String.valueOf(R.drawable.book4),
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 idSpinner=(int) adapterView.getSelectedItemId();
+                adapterView1=adapterView.getSelectedItem().toString();
                 imageView.setImageResource(images[idSpinner]);
                 txtPrice.setText(String.valueOf(priceArray[idSpinner]*counter));
             }
@@ -97,6 +107,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                price=priceArray[idSpinner]*counter;
+                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                String book=adapterView1;
+                int priceTotal=price;
+                int quantity = counter;
+                int imageRes=images[idSpinner];
 
+                Bundle bundle=new Bundle();
+                bundle.putString("Book",book);
+                bundle.putString("Total", String.valueOf(priceTotal));
+                bundle.putString("Quantity", String.valueOf(quantity));
+                bundle.putInt("ImageRes",imageRes);
+
+                intent.putExtras(bundle);
+
+                startActivity(intent);
+
+            }
+        });
     }
 }
